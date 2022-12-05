@@ -1,4 +1,5 @@
-import { HttpExceptionFilter } from './../http-exception.filter';
+import { successInterceptor } from './../common/interceptors/success. interceptor';
+import { HttpExceptionFilter } from '../common/exceptions/http-exception.filter';
 import {
   Controller,
   Delete,
@@ -11,20 +12,23 @@ import {
   Post,
   Put,
   UseFilters,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
 
 @Controller('cats')
+@UseInterceptors(successInterceptor)
+@UseFilters(HttpExceptionFilter)
 export class CatsController {
   //dependency injection 의존성 주입
   constructor(private readonly catsService: CatsService) {}
 
   // cats/
   @Get()
-  @UseFilters(HttpExceptionFilter)
   getAllcat() {
-    throw new HttpException('api error', 401);
-    return 'get all cat api';
+    // throw new HttpException('error', 401);
+    console.log('hello Controller');
+    return { cats: 'cats data' };
   }
 
   // cats/:id
