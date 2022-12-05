@@ -1,22 +1,12 @@
-import { CatsService } from './cats/cats.service';
 import { Body, Controller, Get, Param, Req } from '@nestjs/common';
-import { Request } from 'express';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    private readonly catsService: CatsService,
-  ) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   get(): string {
     return this.appService.getHello();
-  }
-
-  @Get('cats')
-  getHello(): string {
-    return this.catsService.hiCatService();
   }
 }

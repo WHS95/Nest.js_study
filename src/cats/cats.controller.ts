@@ -1,5 +1,16 @@
+import { HttpExceptionFilter } from './../http-exception.filter';
+import {
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  HttpStatus,
+  Patch,
+  Post,
+  Put,
+  UseFilters,
+} from '@nestjs/common';
 import { CatsService } from './cats.service';
-import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
 
 @Controller('cats')
 export class CatsController {
@@ -8,33 +19,35 @@ export class CatsController {
 
   // cats/
   @Get()
+  @UseFilters(HttpExceptionFilter)
   getAllcat() {
-    return 'all cat';
+    throw new HttpException('api error', 401);
+    return 'get all cat api';
   }
 
   // cats/:id
   @Get(':id')
   getOnecat() {
-    return 'one cat';
+    return 'get one cat api';
   }
 
   @Post()
   createCat() {
-    return 'create cat';
+    return 'create cat api';
   }
 
   @Put(':id')
   updateCat() {
-    return 'update cat';
+    return 'update cat api';
   }
 
   @Patch(':id')
   updatePartialCat() {
-    return 'patch cat';
+    return 'patch cat api';
   }
 
   @Delete(':id')
   deleteCat() {
-    return 'delete service';
+    return 'delete service api';
   }
 }
