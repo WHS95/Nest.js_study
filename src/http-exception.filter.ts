@@ -17,7 +17,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
       | string
       | { error: string; statusCode: number; message: string | string[] };
 
-    //우리가 자체적으로 만든 에러
     if (typeof error === 'string') {
       response.status(status).json({
         success: false,
@@ -25,7 +24,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         path: request.url,
         error,
       });
-      //nest 자체 에러
+      //class-validator 고려
     } else {
       response.status(status).json({
         success: false,
