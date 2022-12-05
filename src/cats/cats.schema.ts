@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { IsEmail, IsString, IsNotEmpty } from 'class-validator';
 
 export type CatDocument = HydratedDocument<Cat>;
 
@@ -13,15 +14,26 @@ export class Cat {
     required: true,
     unique: true,
   })
+  @IsEmail()
+  @IsNotEmpty()
   email: string;
 
-  @Prop()
-  catname: number;
+  @Prop({
+    required: true,
+  })
+  @IsString()
+  @IsNotEmpty()
+  name: number;
 
-  @Prop()
+  @Prop({
+    required: true,
+  })
+  @IsString()
+  @IsNotEmpty()
   password: string;
 
   @Prop()
+  @IsString()
   imgUrl: string;
 }
 
