@@ -2,15 +2,8 @@ import { successInterceptor } from './../common/interceptors/success. intercepto
 import { HttpExceptionFilter } from '../common/exceptions/http-exception.filter';
 import {
   Controller,
-  Delete,
   Get,
-  HttpException,
-  HttpStatus,
-  Param,
-  ParseIntPipe,
-  Patch,
   Post,
-  Put,
   UseFilters,
   UseInterceptors,
 } from '@nestjs/common';
@@ -25,39 +18,27 @@ export class CatsController {
 
   // cats/
   @Get()
-  getAllcat() {
-    // throw new HttpException('error', 401);
-    console.log('hello Controller');
-    return { cats: 'cats data' };
-  }
-
-  // cats/:id
-  @Get(':id')
-  //ParseIntPipe으로 인해 string 타입을 Number타입으로 변환가능
-  //더불어, 유효성검사 까지 가능 :id에 Number 타입이 아닌경우 에러 발생
-  getOnecat(@Param('id', ParseIntPipe) id: number) {
-    console.log(id);
-    console.log(typeof id);
-    return 'get one cat api';
+  getCurrentCat() {
+    return 'current Cat';
   }
 
   @Post()
-  createCat() {
-    return 'create cat api';
+  async signUp() {
+    return 'signUp';
   }
 
-  @Put(':id')
-  updateCat() {
-    return 'update cat api';
+  @Post('login')
+  login() {
+    return 'login';
   }
 
-  @Patch(':id')
-  updatePartialCat() {
-    return 'patch cat api';
+  @Post('logout')
+  logout() {
+    return 'logout';
   }
 
-  @Delete(':id')
-  deleteCat() {
-    return 'delete service api';
+  @Post('upload/cats')
+  uploadCatImg() {
+    return 'uploadImg';
   }
 }
